@@ -1,0 +1,457 @@
+Below is a *clean Jira-ready breakdown* of your real-time forum project. I split it into *epics → tasks → subtasks*, and each task includes:
+
+* *Summary*
+* *Description*
+* (Optional) Notes for implementation / best practice
+
+This structure is designed for a *2-person team*, so you can easily assign ownership.
+
+---
+
+# 🚀 EPIC 0 — Project Setup & Architecture
+
+## TASK 0.1 — Initialize Project Structure
+
+*Summary:* Create initial full-stack project structure
+*Description:*
+Set up the base folder structure for frontend, backend, and database. Ensure separation of concerns and scalability for a SPA + Go backend architecture.
+
+*Structure:*
+
+
+/backend
+  /db
+  /handlers
+  /models
+  /websocket
+  main.go
+
+/frontend
+  index.html
+  /css
+  /js
+    app.js
+    auth.js
+    forum.js
+    chat.js
+    websocket.js
+
+/database
+  forum.db
+
+
+---
+
+## TASK 0.2 — Define System Architecture
+
+*Summary:* Design application architecture (SPA + WebSocket + API)
+*Description:*
+Define how frontend communicates with backend:
+
+* HTTP for auth + posts
+* WebSocket for real-time chat + notifications
+* SQLite for persistence
+
+*Deliverable:*
+
+* Simple architecture diagram (even hand-drawn or markdown)
+* API + WebSocket event list
+
+---
+
+# 🔐 EPIC 1 — Authentication System
+
+## TASK 1.1 — SQLite User Schema
+
+*Summary:* Create users table in SQLite
+*Description:*
+Create database schema for users.
+
+*Fields:*
+
+* id (UUID)
+* nickname
+* age
+* gender
+* first_name
+* last_name
+* email (unique)
+* password_hash
+* created_at
+
+---
+
+## TASK 1.2 — User Registration API
+
+*Summary:* Create user registration endpoint
+*Description:*
+Build Go HTTP handler to register users.
+
+*Requirements:*
+
+* Validate input fields
+* Hash password using bcrypt
+* Store user in SQLite
+* Return success/failure response
+
+---
+
+## TASK 1.3 — Login API
+
+*Summary:* Implement login with email or nickname
+*Description:*
+Allow login using:
+
+* email + password OR
+* nickname + password
+
+*Output:*
+
+* Session cookie (secure session ID or UUID)
+* Logged-in user info
+
+---
+
+## TASK 1.4 — Logout System
+
+*Summary:* Implement logout endpoint
+*Description:*
+Destroy session and invalidate user connection.
+
+---
+
+## TASK 1.5 — Frontend Auth UI
+
+*Summary:* Build login/register pages (SPA views)
+*Description:*
+Single HTML page with JS switching between:
+
+* Register form
+* Login form
+
+---
+
+# 📝 EPIC 2 — Posts & Comments System
+
+## TASK 2.1 — Posts Database Schema
+
+*Summary:* Create posts and comments tables
+*Description:*
+
+*Posts:*
+
+* id
+* user_id
+* title
+* content
+* category
+* created_at
+
+*Comments:*
+
+* id
+* post_id
+* user_id
+* content
+* created_at
+
+---
+
+## TASK 2.2 — Create Post API
+
+*Summary:* Allow users to create posts
+*Description:*
+Authenticated users can create posts with categories.
+
+---
+
+## TASK 2.3 — Fetch Posts Feed API
+
+*Summary:* Retrieve all posts for feed
+*Description:*
+Return posts sorted by newest first.
+
+---
+
+## TASK 2.4 — Create Comment API
+
+*Summary:* Add comments to posts
+*Description:*
+Users can comment only when opening a post.
+
+---
+
+## TASK 2.5 — Fetch Comments API
+
+*Summary:* Load comments for a selected post
+*Description:*
+Fetch comments only when user clicks a post.
+
+---
+
+## TASK 2.6 — Frontend Posts UI (SPA Feed)
+
+*Summary:* Build posts feed interface
+*Description:*
+
+* Display posts
+* Open post details
+* Show comments dynamically
+
+---
+
+# 💬 EPIC 3 — Private Messaging System (REAL TIME)
+
+## TASK 3.1 — Chat Database Schema
+
+*Summary:* Create messages table
+*Description:*
+
+*Messages:*
+
+* id
+* sender_id
+* receiver_id
+* content
+* created_at
+
+---
+
+## TASK 3.2 — WebSocket Server Setup (Go)
+
+*Summary:* Initialize WebSocket server
+*Description:*
+Set up Gorilla WebSocket server to handle:
+
+* connections
+* message broadcasting
+* user sessions
+
+---
+
+## TASK 3.3 — WebSocket Client Manager
+
+*Summary:* Manage connected users
+*Description:*
+Maintain:
+
+* map[userID]connection
+* online/offline tracking
+
+---
+
+## TASK 3.4 — Send Private Message (WebSocket Event)
+
+*Summary:* Implement real-time messaging
+*Description:*
+When user sends message:
+
+* send to backend via WebSocket
+* backend forwards to receiver instantly
+* store message in DB
+
+---
+
+## TASK 3.5 — Load Chat History API
+
+*Summary:* Fetch last messages between two users
+*Description:*
+
+* Load last 10 messages
+* Support pagination (load 10 more on scroll)
+
+---
+
+## TASK 3.6 — Chat List (Online Users Panel)
+
+*Summary:* Show users list sorted correctly
+*Description:*
+Rules:
+
+* Online users first
+* Sorted by last message time
+* If no messages → alphabetical order
+
+---
+
+## TASK 3.7 — Frontend Chat UI (SPA Panel)
+
+*Summary:* Build chat interface
+*Description:*
+
+* Fixed sidebar (users list)
+* Chat window
+* Message input
+* Real-time updates
+
+---
+
+## TASK 3.8 — Infinite Scroll Optimization
+
+*Summary:* Implement throttled message loading
+*Description:*
+
+* Load 10 messages per scroll
+* Use debounce/throttle to prevent spam requests
+
+---
+
+# 🔌 EPIC 4 — WebSocket Events System
+
+## TASK 4.1 — Define WebSocket Protocol
+
+*Summary:* Design message event structure
+*Description:*
+Define JSON message format:
+
+Example:
+
+json
+{
+  "type": "private_message",
+  "from": "user1",
+  "to": "user2",
+  "content": "hello",
+  "timestamp": "..."
+}
+
+
+---
+
+## TASK 4.2 — Handle Real-Time Events (Backend)
+
+*Summary:* Process WebSocket messages
+*Description:*
+Handle events:
+
+* new_message
+* user_online
+* user_offline
+
+---
+
+## TASK 4.3 — Frontend WebSocket Handler
+
+*Summary:* Connect frontend to WebSocket
+*Description:*
+
+* Open socket on login
+* Listen for messages
+* Update UI in real time
+
+---
+
+# 🎨 EPIC 5 — Frontend SPA System
+
+## TASK 5.1 — SPA Router (No Framework)
+
+*Summary:* Build client-side navigation system
+*Description:*
+Handle page switching using JS:
+
+* login view
+* register view
+* feed view
+* chat view
+
+---
+
+## TASK 5.2 — Global State Management
+
+*Summary:* Create simple frontend state system
+*Description:*
+Store:
+
+* current user
+* active chat
+* websocket connection
+
+---
+
+## TASK 5.3 — UI Components Structure
+
+*Summary:* Build reusable UI functions
+*Description:*
+Functions for:
+
+* renderPost()
+* renderComment()
+* renderMessage()
+* renderUser()
+
+---
+
+# 🧠 EPIC 6 — Performance & Best Practices
+
+## TASK 6.1 — Implement Throttle/Debounce
+
+*Summary:* Optimize scroll and input events
+*Description:*
+Prevent:
+
+* chat spam requests
+* scroll overload
+
+---
+
+## TASK 6.2 — Secure Password Handling
+
+*Summary:* Ensure password security
+*Description:*
+
+* bcrypt hashing
+* never store plain passwords
+
+---
+
+## TASK 6.3 — Input Validation Layer
+
+*Summary:* Validate all incoming data
+*Description:*
+
+* backend validation
+* prevent empty / invalid requests
+
+---
+
+## TASK 6.4 — Error Handling System
+
+*Summary:* Standardize backend + frontend errors
+*Description:*
+Return consistent JSON errors:
+
+json
+{ "error": "message" }
+
+
+---
+
+# 👥 TEAM SPLIT SUGGESTION (IMPORTANT)
+
+## 👨‍💻 Developer A (Backend Heavy)
+
+* Auth system (Epic 1)
+* Posts & Comments API (Epic 2)
+* Database design
+* WebSocket backend (Epic 3 + 4)
+
+## 👨‍🎨 Developer B (Frontend Heavy)
+
+* SPA system (Epic 5)
+* UI (posts, comments, chat)
+* WebSocket client
+* Chat UX + scroll system
+
+---
+
+# 📌 OPTIONAL NEXT STEP
+
+If you want, I can also give you:
+
+* ✅ Jira import format (CSV / JSON)
+* ✅ Full database SQL schema file
+* ✅ Go backend boilerplate structure
+* ✅ WebSocket message flow diagram
+* ✅ Clean frontend SPA starter code
+
+Just tell me 👍
