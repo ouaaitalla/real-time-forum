@@ -1,36 +1,15 @@
-export function loginTemplate() {
-    return `
-        <div class="login-container">
-            <h1>Login</h1>
+import { loginTemplate } from "../templates/loginTemplate.js";
+import { showRegisterPage } from "../router.js";
 
-            <form id="login-form">
+export function renderLogin() {
+    const app = document.getElementById("app");
 
-                <label for="identifier">Email or Nickname</label>
-                <input
-                    type="text"
-                    id="identifier"
-                    name="identifier"
-                    placeholder="Enter your email or nickname"
-                    required
-                >
+    app.innerHTML = loginTemplate();
 
-                <label for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                >
+    const registerBtn = document.getElementById("go-register");
 
-                <button type="submit">Login</button>
-
-            </form>
-
-            <p>
-                Don't have an account?
-                <a href="#" id="go-register">Register</a>
-            </p>
-        </div>
-    `;
+    registerBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        showRegisterPage();
+    });
 }

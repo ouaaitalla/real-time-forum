@@ -8,6 +8,7 @@ import (
 )
 
 func Routes() {
+	http.Handle("/", http.FileServer(http.Dir("./frontend")))
 	http.HandleFunc("/register", middleware.MethodeMiddleware("POST", authHandlers.RegisterHandler))
 	http.HandleFunc("/login", middleware.MethodeMiddleware("POST", authHandlers.LoginHandler))
 }

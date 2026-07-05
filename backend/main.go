@@ -17,6 +17,7 @@ func main() {
 		return
 	}
 	routes.Routes()
+	fmt.Println("http://localhost:8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("ERROR STARTING SERVER", err)
 	}
