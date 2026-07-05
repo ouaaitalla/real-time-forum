@@ -1,11 +1,16 @@
 package models
 
-type registerReq struct{
+type RegisterReq struct {
 	Username string `json:"username"`
-	Email string `json:"email"`
+	Age      string `json:"age"`
+	Email    string `json:"email"`
 	Password string `json:"passowrd"`
 }
-type loginReq struct{
+type LoginReq struct {
 	Username string `json:"username"`
 	Password string `json:"passowrd"`
+}
+type User struct {
+	Username string `json:"username"`
+	Age      string `json:"age"`
 }
