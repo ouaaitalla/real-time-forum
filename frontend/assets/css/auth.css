@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+.login-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#login-form {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#login-form label {
+    font-size: 14px;
+    color: #444;
+}
+
+#login-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+#login-form input:focus {
+    border-color: #4a90e2;
+}
+#login-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+
+    background: #4a90e2;
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#login-form button:hover {
+    background: #357bd8;
+}
+
+.login-container p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-container a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+/* Register Container */
+
+.register-container {
+    width: 350px;
+    margin: 40px auto;
+}
+
+.register-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+#register-form {
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#register-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+#register-form input,
+#register-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+}
+
+#register-form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: #4CAF50;
+    color: white;
+
+    cursor: pointer;
+}
+
+#register-form button:hover {
+    background: #45a049;
+}
+
+.register-container p {
+    text-align: center;
+}
+
+.register-container a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+.register-container a:hover {
+    text-decoration: underline;
+}

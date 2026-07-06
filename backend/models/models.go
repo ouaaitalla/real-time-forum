@@ -1,19 +1,20 @@
 package models
 
-type Post struct {
-	ID             string `json:"id"`
-	UserID         string `json:"user_id"`
-	AuthorNickname string `json:"author_nickname"`
-	Title          string `json:"title"`
-	Content        string `json:"content"`
-	Category       string `json:"category"`
-	CreatedAt      string `json:"created_at"`
-	CommentCount   int    `json:"comment_count"`
+type RegisterReq struct {
+	Username string `json:"username"`
+	Age      int    `json:"age"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
-type PostRequest struct {
-	Title    string `json:"title"`
-	Content  string `json:"content"`
-	Category string `json:"category"`
+type LoginReq struct {
+	// ID       int    `json:"id"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
+type Res struct {
+	Type     string `json:"type"`
+	Username string `json:"username"`
+	Text     string `json:"text"`
+}
