@@ -12,7 +12,7 @@ type RegisterReq struct {
 
 type LoginReq struct {
 	// ID       int    `json:"id"`
-	Username string `json:"username"`
+	Nickname string `json:"nickname"`
 	Password string `json:"password"`
 }
 

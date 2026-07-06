@@ -10,6 +10,8 @@ export function renderLogin() {
     app.innerHTML = loginTemplate();
     const form = document.getElementById("login-form");
     form.addEventListener("submit", async ()=>{
+        event.preventDefault();
+
         getloginData();
         const data = await loginapi();
         if (data.type === "error"){

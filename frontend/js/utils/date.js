@@ -11,3 +11,6 @@ export const datalogin = {
     nickname: "",
     password: "",
 }
+
+
+
