@@ -17,7 +17,7 @@ export async function loginapi() {
     const response = await fetch("http://localhost:8080/login",{
         method: "POST",
         headers : {
-            "content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         body : JSON.stringify(datalogin)
     })
@@ -26,8 +26,8 @@ export async function loginapi() {
     return data
 }
 export function getloginData(){
-    datalogin.nickname = document.getElementById("identifier");
-    datalogin.password = document.getElementById("password");
+    datalogin.nickname = document.getElementById("identifier").value;
+    datalogin.password = document.getElementById("password").value;
 }
 export function getregisterData() {
     datareg.nickname = document.getElementById("nickname").value;

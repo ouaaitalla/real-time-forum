@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	"real-time-forum/backend/routes"
 	"real-time-forum/database"
 	// "net/http"
@@ -12,7 +13,7 @@ import (
 func main() {
 	err := database.InitDb()
 	if err != nil {
-		//error
+		// error
 		fmt.Println(err)
 		return
 	}

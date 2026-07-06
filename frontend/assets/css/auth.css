@@ -139,3 +139,8 @@ body {
 .register-container a:hover {
     text-decoration: underline;
 }
+.error-message {
+    color: red;
+    margin-top: 10px;
+    min-height: 20px;
+}
