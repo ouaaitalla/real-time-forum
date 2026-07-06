@@ -59,9 +59,8 @@ export function registerTemplate() {
                     name="password"
                     required
                 >
-
-                <button type="submit">Register</button>
-
+                 <div id="register-error" class="error-message"></div>
+                <button id="registerForm" type="submit">Register</button>
             </form>
 
             <p>

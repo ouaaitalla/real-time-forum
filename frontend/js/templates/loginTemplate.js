@@ -22,7 +22,7 @@ export function loginTemplate() {
                     placeholder="Enter your password"
                     required
                 >
-
+                 <div id="login-error" class="error-message"></div>
                 <button type="submit">Login</button>
 
             </form>
