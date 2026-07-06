@@ -30,8 +30,7 @@ export function loginTemplate() {
             <p>
                 Don't have an account?
                 <a href="#" id="go-register">Register</a>
-             </p>
+            </p>
         </div>
     `;
 }
-
