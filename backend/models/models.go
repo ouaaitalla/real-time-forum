@@ -1,10 +1,13 @@
 package models
 
 type RegisterReq struct {
-	Username string `json:"username"`
-	Age      int    `json:"age"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+    Nickname string `json:"nickname"`
+    Firstname string `json:"firstname"`
+    Lastname string `json:"lastname"`
+    Age string `json:"age"`
+    Gender string `json:"gender"`
+    Email string `json:"email"`
+    Password string `json:"password"`
 }
 
 type LoginReq struct {

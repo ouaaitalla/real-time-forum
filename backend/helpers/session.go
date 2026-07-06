@@ -10,6 +10,7 @@ import (
 
 	"github.com/google/uuid"
 )
+
 const SESSION_COOKIE_NAME = "forum_session"
 
 func CreateSession(userID int) (string, error) {

@@ -18,7 +18,6 @@ func InitDb() (error) {
 	if err != nil {
 		return err
 	}
-
 	_, err = DB.Exec(string(schema))
 	if err != nil {
 		DB.Close()

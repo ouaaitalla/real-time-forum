@@ -1,9 +1,12 @@
 CREATE TABLE IF NOT EXISTS  users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     age INTEGER,
-    nickname TEXT NOT NULL,
+    nickname TEXT UNIQUE NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    gender TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS posts (

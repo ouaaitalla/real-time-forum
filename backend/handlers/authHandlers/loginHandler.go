@@ -11,11 +11,13 @@ import (
 	"real-time-forum/backend/models"
 	"real-time-forum/database"
 )
+
 var userID int
+
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var logreq models.LoginReq
 	err := json.NewDecoder(r.Body).Decode(&logreq)
-	if err != nil{
+	if err != nil {
 		helpers.Res(w, 400, "bad request", "error", logreq.Username)
 		return
 	}
