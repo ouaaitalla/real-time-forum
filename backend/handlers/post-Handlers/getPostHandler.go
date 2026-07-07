@@ -1,1 +1,5 @@
 package posthandlers
+
+func GetPostsHandler(){
+	
+}
