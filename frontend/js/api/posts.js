@@ -1,5 +1,5 @@
 
-export async function fetchPosts(limit = 20, cursor = null) {
+export async function fetchPosts() {
     let url = `http://localhost:8080/posts?limit=${limit}`;
 
     if (cursor !== null) {
@@ -13,6 +13,5 @@ export async function fetchPosts(limit = 20, cursor = null) {
         }
     });
     data = await response.json();
-    let nextcursor = data.nextcursor
     return data
 }
