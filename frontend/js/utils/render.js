@@ -1,3 +1,5 @@
+
+
 export function hideError(id) {
 
     document.getElementById(id).style.display = "none";
@@ -10,3 +12,5 @@ export function showError(message, id) {
 
     div.style.display = "block";
 }
+
+
