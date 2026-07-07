@@ -4,4 +4,5 @@ export function renderHome() {
     const app = document.getElementById("app");
 
     app.innerHTML = homeTemplate();
+    
 }
