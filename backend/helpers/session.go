@@ -5,9 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
-	"time"
-
 	"real-time-forum/database"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -62,6 +61,7 @@ func DeleteSession(sessionID string) error {
 	_, err := database.DB.Exec(query, sessionID)
 	return err
 }
+
 func GetUserFromRequest(r *http.Request) (int, error) {
 	cookie, err := r.Cookie(SESSION_COOKIE_NAME)
 	if err != nil {
@@ -69,6 +69,7 @@ func GetUserFromRequest(r *http.Request) (int, error) {
 	}
 	return GetUserIDFromSession(cookie.Value)
 }
+
 func LoggedIn(r *http.Request) bool {
 	id, err := GetUserFromRequest(r)
 	return err == nil && id > 0
@@ -88,7 +89,6 @@ func ValidSession(r *http.Request) bool {
 		FROM sessions
 		WHERE id = ?
 	`, cookie.Value).Scan(&userID, &expiresAt)
-
 	if err != nil {
 		return false
 	}
@@ -100,4 +100,3 @@ func ValidSession(r *http.Request) bool {
 
 	return true
 }
-

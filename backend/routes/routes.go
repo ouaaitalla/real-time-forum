@@ -13,5 +13,6 @@ func Routes() {
 	http.HandleFunc("/register", middleware.MethodeMiddleware("POST", authHandlers.RegisterHandler))
 	http.HandleFunc("/login", middleware.MethodeMiddleware("POST", authHandlers.LoginHandler))
 	// http.HandleFunc("/logout", middleware.MethodeMiddleware("POST", authHandlers.LogoutHandler))
-	http.HandleFunc("/home", middleware.MethodeMiddleware("POST", middleware.AuthMiddleware(posthandlers.GetPostsHandler)))
+	http.HandleFunc("/posts", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(posthandlers.GetPostsHandler)))
+	http.HandleFunc("/creatPost", middleware.MethodeMiddleware("POST", middleware.AuthMiddleware(posthandlers.CreatPostHandler)))
 }

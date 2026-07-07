@@ -24,11 +24,14 @@ type Res struct {
 type Post struct{
     ID  int `json:"id"`
     User_id int `json:"user_id"`
-    Full_name string `json:"full_name"`
+    Nickname string `json:"nickname"`
     Title string `json:"title"`
     Content string `json:"content"`
+    Category string `json:"category"`
     Created_at string `json:"created_at"`
 }
-type ReqPost struct{
-    
+type ReqCreatPost struct{
+   Title string `json:"title"`
+   Content string `json:"contend"`
+   Category int `json:"category"`
 }
