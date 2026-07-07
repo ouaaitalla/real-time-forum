@@ -8,7 +8,6 @@ export function renderNavbar() {
             <nav class="navbar-links">
                 <a href="#/">Home</a>
                 <a href="#/messages">Messages</a>
-                <a href="#/profile">Profile</a>
                 <button id="logout-btn">Logout</button>
             </nav>
 

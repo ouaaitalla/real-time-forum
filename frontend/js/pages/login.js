@@ -4,6 +4,7 @@ import { getloginData } from "../api/auth.js";
 import { loginapi } from "../api/auth.js";
 import { showError } from "../utils/render.js";
 import { showHomePage } from "../router.js";
+import { renderHome } from "./home.js";
 
 export function renderLogin() {
     const app = document.getElementById("app");
@@ -18,7 +19,7 @@ export function renderLogin() {
         if (data.type === "error"){
             showError(data.text, "login-error")
         }
-        showHomePage()
+            renderHome()
     })
     const registerBtn = document.getElementById("go-register");
 
