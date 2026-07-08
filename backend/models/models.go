@@ -33,16 +33,26 @@ type Post struct{
          int `json:"dislikes"`
     Created_at string `json:"created_at"`
 }
+type Comment struct{
+    ID int `json:"id"`
+    Post_id int `json:"post_id"`
+    Nickname string `json:"nickname"`
+    Content string `json:"content"`
+    Created_at string `json:"created_at"`
+}
 type ReqCreatPost struct{
    Title string `json:"title"`
    Content string `json:"contend"`
    Category int `json:"category"`
 }
+type ReqCreatComment struct{
+    
+}
 type Reaction struct {
     ID           int    `json:"id"`
     UserID       int    `json:"user_id"`
     PostID       int    `json:"post_id"`
-    ReactionType string `json:"reaction"`
+    Type int `json:"type"`
 }
 type ReactionRequest struct {
     Reaction string `json:"reaction"`

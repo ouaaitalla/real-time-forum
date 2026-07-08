@@ -21,10 +21,12 @@ func GetPostsHandler(w http.ResponseWriter, r *http.Request) {
 	cursorStr := query.Get("cursor")
 	cur, err := strconv.Atoi(cursorStr)
 	if err != nil {
+		fmt.Println(err)
 		cur = 0
 	}
 	limit, err = strconv.Atoi(limitStr)
 	if err != nil {
+		fmt.Println(err)
 		limit = 20
 	}
 	rows, err1 := database.DB.Query(Queryselector, limit, cur)
@@ -37,6 +39,7 @@ func GetPostsHandler(w http.ResponseWriter, r *http.Request) {
 		var post models.Post
 		err := rows.Scan(&post.ID, &post.User_id, &post.Nickname, &post.Title, &post.Content, &post.Avatar, &post.Created_at)
 		if err != nil {
+		fmt.Println(err)
 			helpers.Res(w, 500, "Scan Error", "error", "nope")
 			return
 		}
