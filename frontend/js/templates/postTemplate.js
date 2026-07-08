@@ -1,6 +1,6 @@
 export function createPostModal() {
     return `
-        <div id="create-post-modal" class="modal">
+        <div id="create-post-modal" class="modal hidden">
 
             <div class="modal-content">
 
@@ -22,7 +22,6 @@ export function createPostModal() {
 
                     <label>Category</label>
                     <select id="post-category" required>
-                        <option value="">Choose category</option>
                         <option value="General">General</option>
                         <option value="Programming">Programming</option>
                         <option value="Gaming">Gaming</option>
@@ -37,7 +36,7 @@ export function createPostModal() {
                         required
                     ></textarea>
 
-                    <button type="submit">
+                    <button type="submit" id="submit">
                         Publish
                     </button>
 

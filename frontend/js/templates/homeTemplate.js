@@ -9,7 +9,7 @@ export function renderNavbar() {
             </div>
             <nav class="navbar-links">
                 <a href="#/">Home</a>
-                <button id="create-post-btn">
+                <button id="create-post-btn" class="create-post-btn">
                     + Create Post
                 </button>
                 <a href="#/messages">Messages</a>

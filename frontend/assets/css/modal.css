@@ -1,3 +1,5 @@
+
+
 .modal{
     position:fixed;
     inset:0;
@@ -6,7 +8,10 @@
     justify-content:center;
     align-items:center;
     z-index:1000;
-    display: none;
+}
+
+.modal.hidden{
+    display:none;
 }
 
 .modal-content{
@@ -71,3 +76,5 @@
 
     cursor:pointer;
 }
+
+

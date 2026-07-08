@@ -1,4 +1,3 @@
-
 export const argument = {
     nextcursor : 0,
     posts : [],

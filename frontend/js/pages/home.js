@@ -2,6 +2,8 @@ import { homeTemplate } from "../templates/homeTemplate.js";
 import { fetchPosts } from "../api/posts.js";
 import { argument } from "../state.js";
 import { postCard } from "../templates/postTemplate.js";
+import {createPostModal} from "../templates/postTemplate.js"
+import { createPost } from "../api/posts.js";
 
 
 export async function renderHome() {
@@ -19,24 +21,48 @@ export async function renderHome() {
     });
     } catch (error) {
         console.error("Error fetching posts:", error);
-        postsContainer.innerHTML = "<p>Error loading posts. Please try again later.</p>";
+        postsContainer.innerHTML = "<p>Error loading posts</p>";
     }
 
-   const modal = document.querySelector(".modal");
+    createPostModal()
 
-    document.getElementById("create-post-btn").addEventListener("click", () => {
-        modal.style.display = "block";
-});
+    const modal = document.getElementById("create-post-modal");
+
+    document
+        .getElementById("create-post-btn")
+        .addEventListener("click", () => {
+            console.log("button clicked");
+            modal.classList.remove("hidden");
+        });
 
     document
         .getElementById("close-modal")
-        addEventListener("click", () => {
-            modal.style.display = "none";
+        .addEventListener("click", () => {
+            modal.classList.add("hidden");
         });
+
+        const createPostForm = document.getElementById("create-post-form");
+        createPostForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            console.log("clicked")
+            const postData = {
+                title: document.getElementById("post-title").value,
+                category: document.getElementById("post-category").value,
+                content: document.getElementById("post-content").value
+        };
+
+    try {
+        const data = await createPost(postData);
+        console.log(data);
+    } catch (err) {
+        console.error(err);
+    }
+
+});
 
 }
 
-async function loadPosts() {``
+async function loadPosts() {
 
     if (argument.isLoading || !argument.hasMore) return;
 
