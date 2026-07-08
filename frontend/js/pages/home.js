@@ -4,6 +4,8 @@ import { argument } from "../state.js";
 import { postCard } from "../templates/postTemplate.js";
 import {createPostModal} from "../templates/postTemplate.js"
 import { createPost } from "../api/posts.js";
+import { fetchPost } from "../api/posts.js";
+import { commentCard } from "../components/commentCard.js";
 
 
 export async function renderHome() {
@@ -55,6 +57,29 @@ export async function renderHome() {
         }
 
     });
+    document.addEventListener("click", async (e) => {
+        const card = e.target.closest(".post-card");
+        if (!card) return;
+        const id = card.dataset.id;
+        const data = await fetchPost(id);
+        document.getElementById("modal-post").innerHTML =
+            postCard(data.post);
+        document.getElementById("comments-container").innerHTML =
+            data.comments
+                .map(comment => commentCard(comment))
+                .join("");
+        document
+            .getElementById("post-modal")
+            .classList.remove("hidden");
+    });
+    document
+        .getElementById("close-post-modal")
+        .addEventListener("click", () => {
+
+            document
+                .getElementById("post-modal")
+                .classList.add("hidden");
+        });
 
 }
 

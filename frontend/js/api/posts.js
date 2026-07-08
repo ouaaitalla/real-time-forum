@@ -31,3 +31,11 @@ export async function createPost(postData) {
 }
 
 
+export async function fetchPost(id){
+
+    const response = await fetch(
+        `http://localhost:8080/posts/${id}`
+    );
+
+    return await response.json();
+}
