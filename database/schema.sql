@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS posts (
     nickname TEXT NOT NULL,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    avatar TEXT NOT NULL,
+    category TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -24,4 +24,35 @@ CREATE TABLE IF NOT EXISTS sessions (
     user_id TEXT NOT NULL,
     expires_at DATETIME NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+CREATE TABLE IF NOT EXISTS comments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id INTEGER,
+    user_id TEXT NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS post_reactions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    type INTEGER NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+
+    UNIQUE(post_id, user_id)
+);
+CREATE TABLE IF NOT EXISTS comment_reactions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    comment_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    type INTEGER NOT NULL DEFAULT 0,
+   
+
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+
+    UNIQUE(comment_id, user_id)
 );

@@ -2,6 +2,7 @@ package posthandlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"real-time-forum/backend/helpers"
@@ -10,6 +11,7 @@ import (
 )
 
 func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("hello")
 	var req models.ReqCreatPost
 	json.NewDecoder(r.Body).Decode(&req)
 	userId, err := helpers.GetUserFromRequest(r)
@@ -29,16 +31,18 @@ func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	_, err = database.DB.Exec(
 		`INSERT INTO posts (user_id, nickname, title, content, category)
-     VALUES (?, ?, ?)`,
+     VALUES (?, ?, ?, ?, ?)`,
 		userId,
 		nickname,
 		req.Title,
 		req.Content,
 		req.Category,
 	)
-	if err != nil{
+	if err != nil {
+		fmt.Println(err)
 		helpers.Res(w, 400, "Post created failed", "error", nickname)
 		return
 	}
+	fmt.Println("success")
 	helpers.Res(w, 200, "Post created successfully", "success", nickname)
 }

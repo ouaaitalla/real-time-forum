@@ -48,7 +48,7 @@ body {
     border: none;
     border-radius: 6px;
 
-    background: #4a90e2;
+    background: #000000;
     color: white;
     font-weight: bold;
 
@@ -56,7 +56,7 @@ body {
 }
 
 #login-form button:hover {
-    background: #357bd8;
+    background: #000000;
 }
 
 .login-container p {
@@ -117,14 +117,14 @@ body {
     border: none;
     border-radius: 4px;
 
-    background: #4CAF50;
+    background: #000000;
     color: white;
 
     cursor: pointer;
 }
 
 #register-form button:hover {
-    background: #45a049;
+    background: #000000;
 }
 
 .register-container p {
@@ -133,7 +133,7 @@ body {
 
 .register-container a {
     text-decoration: none;
-    color: #4CAF50;
+    color: #000000;
 }
 
 .register-container a:hover {

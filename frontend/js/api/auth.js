@@ -10,7 +10,6 @@ export async function registerapi() {
     });
 
     const data = await response.json();
-    // console.log(data);
     return data
 }
 export async function loginapi() {
