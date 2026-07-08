@@ -6,7 +6,7 @@ export function renderHome() {
     const app = document.getElementById("app");
 
     app.innerHTML = homeTemplate();
-    const data = await fetchPosts(argument);
-    argument.nextcursor = data.nextcursor
+    // const data = await fetchPosts(argument);
+    // argument.nextcursor = data.nextcursor
 }
 

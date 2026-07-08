@@ -8,7 +8,7 @@ import { renderHome } from "./home.js";
 
 export function renderLogin() {
     const app = document.getElementById("app");
-
+    console.log("debug")
     app.innerHTML = loginTemplate();
     const form = document.getElementById("login-form");
     form.addEventListener("submit", async ()=>{

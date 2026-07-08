@@ -24,6 +24,11 @@ export function homeTemplate() {
             <section class="posts-container">
                 <!-- Posts will be rendered here -->
             </section>
+            <div id="posts-container"></div>
+
+            <div id="loading" style="display: none;">
+                Loading...
+            </div>
 
         </main>
     `;
