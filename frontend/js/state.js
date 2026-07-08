@@ -1,11 +1,4 @@
-const Post = {
-    id : 0,
-    fullName : "",
-    avatar : "",
-    title : "",
-    content : "",
-    creatAt : "",
-}
+
 export const argument = {
     nextcursor : 0,
     posts : [],
@@ -29,6 +22,3 @@ export const post = {
     avatar : ""
 }
 
-export let nextCursor = null;
-export let hasMore = true;
-export let isLoading = false;

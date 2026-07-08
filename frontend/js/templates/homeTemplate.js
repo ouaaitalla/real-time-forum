@@ -1,4 +1,4 @@
-import { createPostModal } from "../components/postForm.js";
+import { createPostModal } from "./postTemplate.js";
 
 export function renderNavbar() {
     return `

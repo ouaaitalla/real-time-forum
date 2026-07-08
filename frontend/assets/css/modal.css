@@ -1,18 +1,12 @@
-.hidden{
-    display:none;
-}
-
 .modal{
     position:fixed;
     inset:0;
-
     background:rgba(0,0,0,.5);
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     z-index:1000;
+    display: none;
 }
 
 .modal-content{
@@ -71,7 +65,7 @@
 
     border-radius:8px;
 
-    background:#2563eb;
+    background:#000000;
 
     color:white;
 

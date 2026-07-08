@@ -1,9 +1,10 @@
+import { argument } from "../state";
 
 export async function fetchPosts() {
-    let url = `http://localhost:8080/posts?limit=${limit}`;
+    let url = `http://localhost:8080/posts?limit=${argument.limit}`;
 
-    if (cursor !== null) {
-        url += `&cursor=${cursor}`;
+    if (argument.cursor !== null) {
+        url += `&cursor=${argument.cursor}`;
     }
 
     const response = await fetch(url, {

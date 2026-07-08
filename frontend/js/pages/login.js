@@ -3,7 +3,6 @@ import { showRegisterPage } from "../router.js";
 import { getloginData } from "../api/auth.js";
 import { loginapi } from "../api/auth.js";
 import { showError } from "../utils/render.js";
-import { showHomePage } from "../router.js";
 import { renderHome } from "./home.js";
 
 export function renderLogin() {

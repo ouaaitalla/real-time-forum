@@ -1,7 +1,7 @@
 import { homeTemplate } from "../templates/homeTemplate.js";
 import { fetchPosts } from "../api/posts.js";
 import { argument } from "../state.js";
-import { postCard } from "../components/postCard.js";
+import { postCard } from "../templates/postTemplate.js";
 
 
 export async function renderHome() {
@@ -22,23 +22,21 @@ export async function renderHome() {
         postsContainer.innerHTML = "<p>Error loading posts. Please try again later.</p>";
     }
 
-    const modal = document.getElementById("create-post-modal");
+   const modal = document.querySelector(".modal");
 
-    document
-        .getElementById("create-post-btn")
-        .addEventListener("click", () => {
-            modal.classList.remove("hidden");
-        });
+    document.getElementById("create-post-btn").addEventListener("click", () => {
+        modal.style.display = "block";
+});
 
     document
         .getElementById("close-modal")
         addEventListener("click", () => {
-            modal.classList.add("hidden");
+            modal.style.display = "none";
         });
 
 }
 
-async function loadPosts() {
+async function loadPosts() {``
 
     if (argument.isLoading || !argument.hasMore) return;
 
