@@ -43,6 +43,10 @@ func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 		helpers.Res(w, 400, "Post created failed", "error", nickname)
 		return
 	}
+	var post models.Post
+	// post, err = GetPostHandler()
 	fmt.Println("success")
-	helpers.Res(w, 200, "Post created successfully", "success", nickname)
+	w.WriteHeader(200)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(&post)
 }
