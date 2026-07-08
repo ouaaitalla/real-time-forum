@@ -22,6 +22,20 @@ export async function renderHome() {
         postsContainer.innerHTML = "<p>Error loading posts. Please try again later.</p>";
     }
 
+    const modal = document.getElementById("create-post-modal");
+
+    document
+        .getElementById("create-post-btn")
+        .addEventListener("click", () => {
+            modal.classList.remove("hidden");
+        });
+
+    document
+        .getElementById("close-modal")
+        addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+
 }
 
 async function loadPosts() {

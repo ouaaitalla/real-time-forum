@@ -1,3 +1,5 @@
+import { createPostModal } from "../components/postForm.js";
+
 export function renderNavbar() {
     return `
         <header class="navbar">
@@ -7,6 +9,9 @@ export function renderNavbar() {
             </div>
             <nav class="navbar-links">
                 <a href="#/">Home</a>
+                <button id="create-post-btn">
+                    + Create Post
+                </button>
                 <a href="#/messages">Messages</a>
                 <button id="logout-btn">Logout</button>
             </nav>
@@ -18,7 +23,7 @@ export function renderNavbar() {
 export function homeTemplate() {
     return `
         ${renderNavbar()}
-
+        ${createPostModal()}
         <main class="home-container">
 
             <section class="posts-container">
