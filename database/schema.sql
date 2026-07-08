@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS posts (
     nickname TEXT NOT NULL,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
+    avatar TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );

@@ -35,7 +35,7 @@ func GetPostsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	for rows.Next() {
 		var post models.Post
-		err := rows.Scan(&post.ID, &post.User_id, &post.Nickname, &post.Title, &post.Content, &post.Created_at)
+		err := rows.Scan(&post.ID, &post.User_id, &post.Nickname, &post.Title, &post.Content, &post.Avatar, &post.Created_at)
 		if err != nil {
 			helpers.Res(w, 500, "Scan Error", "error", "nope")
 			return
