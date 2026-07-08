@@ -1,13 +1,16 @@
 package database
 
 import (
+	"database/sql"
+	"fmt"
 	"os"
-    "database/sql"
 
-    _ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 )
+
 var DB *sql.DB
-func InitDb() (error) {
+
+func InitDb() error {
 	var err error
 	DB, err = sql.Open("sqlite3", "DB.db")
 	if err != nil {
@@ -21,6 +24,10 @@ func InitDb() (error) {
 	_, err = DB.Exec(string(schema))
 	if err != nil {
 		DB.Close()
+		return err
+	}
+	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	return err
