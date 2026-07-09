@@ -1,5 +1,5 @@
 import { createPostModal } from "./postTemplate.js";
-
+import { postModal } from "./postTemplate.js";
 export function renderNavbar() {
     return `
         <header class="navbar">

@@ -9,13 +9,14 @@ import { commentCard } from "../components/commentCard.js";
 
 
 export async function renderHome() {
+    console.log('hello')
     const app = document.getElementById("app");
 
     app.innerHTML = homeTemplate();
     const postsContainer = document.getElementById("posts-container");
     try {
     const data = await fetchPosts(argument);
-    argument.nextcursor = data.nextcursor;
+    argument.nextcursor = 22
     data.forEach((post) => {
         postsContainer.innerHTML += postCard(post);
     });
