@@ -9,7 +9,6 @@ import { commentCard } from "../components/commentCard.js";
 
 
 export async function renderHome() {
-    console.log('hello')
     const app = document.getElementById("app");
 
     app.innerHTML = homeTemplate();
@@ -51,10 +50,15 @@ export async function renderHome() {
         };
 
         try {
-            const data = await createPost(postData);
+            const r = await createPost(postData);
             console.log(data);
         } catch (err) {
             console.error(err);
+        }
+        const data = undefined
+        if (r.type !== "error"){
+            data = await fetchPost(r.id)
+            return
         }
 
     });
@@ -64,11 +68,11 @@ export async function renderHome() {
         const id = card.dataset.id;
         const data = await fetchPost(id);
         document.getElementById("modal-post").innerHTML =
-            postCard(data.post);
-        document.getElementById("comments-container").innerHTML =
-            data.comments
-                .map(comment => commentCard(comment))
-                .join("");
+            postCard(data);
+        // document.getElementById("comments-container").innerHTML =
+        //     data.comments
+        //         .map(comment => commentCard(comment))
+        //         .join("");
         document
             .getElementById("post-modal")
             .classList.remove("hidden");

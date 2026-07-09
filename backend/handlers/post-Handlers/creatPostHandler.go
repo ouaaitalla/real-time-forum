@@ -13,10 +13,14 @@ import (
 func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("hello")
 	var req models.ReqCreatPost
-	json.NewDecoder(r.Body).Decode(&req)
+	errD := json.NewDecoder(r.Body).Decode(&req)
+	if errD != nil{
+		helpers.Res(w, 400, "bad request", "error", "", 0)
+		return
+	}
 	userId, err := helpers.GetUserFromRequest(r)
 	if err != nil {
-		helpers.Res(w, 401, "Unauthorized", "error", "")
+		helpers.Res(w, 401, "Unauthorized", "error", "", 0)
 		return
 	}
 	var nickname string
@@ -26,10 +30,10 @@ func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 		userId,
 	).Scan(&nickname)
 	if err != nil {
-		helpers.Res(w, 500, "User not found", "error", "")
+		helpers.Res(w, 500, "User not found", "error", "", 0)
 		return
 	}
-	_, err = database.DB.Exec(
+	result, err1 := database.DB.Exec(
 		`INSERT INTO posts (user_id, nickname, title, content, category)
      VALUES (?, ?, ?, ?, ?)`,
 		userId,
@@ -38,15 +42,16 @@ func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 		req.Content,
 		req.Category,
 	)
-	if err != nil {
+	if err1 != nil {
 		fmt.Println(err)
-		helpers.Res(w, 400, "Post created failed", "error", nickname)
+		helpers.Res(w, 400, "Post created failed", "error", nickname, 0)
 		return
 	}
-	var post models.Post
-	// post, err = GetPostHandler()
-	fmt.Println("success")
-	w.WriteHeader(200)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(&post)
+	var id int64
+	id, err = result.LastInsertId()
+	if err != nil{
+		helpers.Res(w, 500, "error get id", "error", "", 0)
+		return
+	}
+	helpers.Res(w, 200, "completly created post sussfuly", "success", "", id)
 }

@@ -20,6 +20,7 @@ type Res struct {
 	Type     string `json:"type"`
 	Username string `json:"username"`
 	Text     string `json:"text"`
+	ID       int64  `json:"id"`
 }
 type Post struct {
 	ID            int    `json:"id"`

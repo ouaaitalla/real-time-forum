@@ -37,3 +37,10 @@ export function getregisterData() {
     datareg.email = document.getElementById("email").value;
     datareg.password = document.getElementById("password").value;
 }
+export async function checkSession() {
+    const res = await fetch("http://localhost:8080/session", {
+        method: "GET",
+    });
+
+    return await res.json();
+}

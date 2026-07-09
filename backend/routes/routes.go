@@ -12,7 +12,9 @@ func Routes() {
 	http.Handle("/", http.FileServer(http.Dir("./frontend")))
 	http.HandleFunc("/register", middleware.MethodeMiddleware("POST", authHandlers.RegisterHandler))
 	http.HandleFunc("/login", middleware.MethodeMiddleware("POST", authHandlers.LoginHandler))
-	// http.HandleFunc("/logout", middleware.MethodeMiddleware("POST", authHandlers.LogoutHandler))
+	http.HandleFunc("/session",middleware.MethodeMiddleware("GET", authHandlers.CheckSessionHandler))
+	http.HandleFunc("/logout", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(authHandlers.LogoutHandler)))
 	http.HandleFunc("/posts", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(posthandlers.GetPostsHandler)))
+	http.HandleFunc("/post/{id}", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(posthandlers.GetPostHandler)))
 	http.HandleFunc("/creatPost", middleware.MethodeMiddleware("POST", middleware.AuthMiddleware(posthandlers.CreatPostHandler)))
 }
