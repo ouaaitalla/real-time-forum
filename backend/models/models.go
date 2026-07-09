@@ -37,6 +37,7 @@ type Post struct {
 }
 type Comment struct {
 	ID         int    `json:"id"`
+	User_id       int    `json:"user_id"`
 	Post_id    int    `json:"post_id"`
 	Nickname   string `json:"nickname"`
 	Content    string `json:"content"`
@@ -45,17 +46,17 @@ type Comment struct {
 type ReqCreatPost struct {
 	Title    string `json:"title"`
 	Content  string `json:"contend"`
-	Category int    `json:"category"`
+	Category string `json:"category"`
 }
-type (
-	ReqCreatComment struct{}
-	Reaction        struct {
-		ID     int `json:"id"`
-		UserID int `json:"user_id"`
-		PostID int `json:"post_id"`
-		Type   int `json:"type"`
-	}
-)
+type Reaction struct {
+	ID     int `json:"id"`
+	UserID int `json:"user_id"`
+	PostID int `json:"post_id"`
+	Type   int `json:"type"`
+}
+type ReqCreatComment struct {
+	Content string `json:"contend"`
+}
 
 type ReactionRequest struct {
 	Reaction string `json:"reaction"`

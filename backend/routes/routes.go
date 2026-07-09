@@ -4,15 +4,17 @@ import (
 	"net/http"
 
 	"real-time-forum/backend/handlers/authHandlers"
+	commenthandlers "real-time-forum/backend/handlers/comment-Handlers"
 	posthandlers "real-time-forum/backend/handlers/post-Handlers"
 	"real-time-forum/backend/middleware"
 )
 
 func Routes() {
 	http.Handle("/", http.FileServer(http.Dir("./frontend")))
+	http.HandleFunc("creatComment", middleware.MethodeMiddleware("POST", middleware.AuthMiddleware(commenthandlers.CreatCommentHandler)))
 	http.HandleFunc("/register", middleware.MethodeMiddleware("POST", authHandlers.RegisterHandler))
 	http.HandleFunc("/login", middleware.MethodeMiddleware("POST", authHandlers.LoginHandler))
-	http.HandleFunc("/session",middleware.MethodeMiddleware("GET", authHandlers.CheckSessionHandler))
+	http.HandleFunc("/session", middleware.MethodeMiddleware("GET", authHandlers.CheckSessionHandler))
 	http.HandleFunc("/logout", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(authHandlers.LogoutHandler)))
 	http.HandleFunc("/posts", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(posthandlers.GetPostsHandler)))
 	http.HandleFunc("/post/{id}", middleware.MethodeMiddleware("GET", middleware.AuthMiddleware(posthandlers.GetPostHandler)))

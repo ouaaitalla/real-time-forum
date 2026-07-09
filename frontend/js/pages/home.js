@@ -42,7 +42,7 @@ export async function renderHome() {
         const createPostForm = document.getElementById("create-post-form");
         createPostForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            console.log("clicked")
+            // console.log("clicked")
             const postData = {
                 title: document.getElementById("post-title").value,
                 category: document.getElementById("post-category").value,
@@ -53,7 +53,7 @@ export async function renderHome() {
             const r = await createPost(postData);
             console.log(data);
         } catch (err) {
-            console.error(err);
+            // console.error(err);
         }
         const data = undefined
         if (r.type !== "error"){

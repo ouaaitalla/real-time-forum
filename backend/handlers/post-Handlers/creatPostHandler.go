@@ -11,15 +11,16 @@ import (
 )
 
 func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("hello")
 	var req models.ReqCreatPost
 	errD := json.NewDecoder(r.Body).Decode(&req)
 	if errD != nil{
+		fmt.Println(errD)
 		helpers.Res(w, 400, "bad request", "error", "", 0)
 		return
 	}
 	userId, err := helpers.GetUserFromRequest(r)
 	if err != nil {
+		fmt.Println(err)
 		helpers.Res(w, 401, "Unauthorized", "error", "", 0)
 		return
 	}
@@ -30,6 +31,7 @@ func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 		userId,
 	).Scan(&nickname)
 	if err != nil {
+		fmt.Println(err)
 		helpers.Res(w, 500, "User not found", "error", "", 0)
 		return
 	}
@@ -50,6 +52,7 @@ func CreatPostHandler(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	id, err = result.LastInsertId()
 	if err != nil{
+		fmt.Println(err)
 		helpers.Res(w, 500, "error get id", "error", "", 0)
 		return
 	}
