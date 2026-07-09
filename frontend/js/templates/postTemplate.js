@@ -100,3 +100,36 @@ export function postCard(post) {
     `;
 }
 
+export function postDetailsTemplate() {
+    return `
+        ${renderNavbar()}
+
+        <main class="post-page">
+
+            <section id="post-container"></section>
+
+            <section class="comments">
+
+                <h2>Comments</h2>
+
+                <form id="comment-form">
+
+                    <textarea
+                        id="comment-content"
+                        placeholder="Write a comment..."
+                        required
+                    ></textarea>
+
+                    <button type="submit">
+                        Comment
+                    </button>
+
+                </form>
+
+                <div id="comments-container"></div>
+
+            </section>
+
+        </main>
+    `;
+}

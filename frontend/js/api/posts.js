@@ -1,3 +1,4 @@
+
 import { argument } from "../state.js"
 
 export async function fetchPosts() {
@@ -26,8 +27,15 @@ export async function createPost(postData) {
         body: JSON.stringify(postData)
     });
 
-    const data = await response.json();
-
-    return data;
+    return await response.json()
 }
 
+
+export async function fetchPost(id){
+
+    const response = await fetch(
+        `http://localhost:8080/posts/${id}`
+    );
+
+    return await response.json();
+}

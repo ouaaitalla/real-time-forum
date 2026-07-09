@@ -1,0 +1,117 @@
+/* =========================
+   Posts Container
+========================= */
+
+.posts-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================
+   Post Card
+========================= */
+
+.post-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    padding: 20px;
+
+    transition: .2s ease;
+    cursor: pointer;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+/* =========================
+   Header
+========================= */
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.post-avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-author {
+    margin: 0;
+    font-size: 1rem;
+    color: #111827;
+}
+
+.post-date {
+    font-size: .85rem;
+    color: #6b7280;
+}
+
+/* =========================
+   Body
+========================= */
+
+.post-title {
+    margin-bottom: 10px;
+    color: #111827;
+    font-size: 1.3rem;
+}
+
+.post-content {
+    color: #4b5563;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.post-footer {
+    margin-top: 20px;
+
+    display: flex;
+    gap: 15px;
+}
+
+.post-action {
+    border: none;
+    background: #f3f4f6;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: .9rem;
+
+    transition: .2s;
+}
+
+.post-action:hover {
+    background: #e5e7eb;
+}

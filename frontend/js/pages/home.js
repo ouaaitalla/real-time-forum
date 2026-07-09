@@ -4,6 +4,8 @@ import { argument } from "../state.js";
 import { postCard } from "../templates/postTemplate.js";
 import {createPostModal} from "../templates/postTemplate.js"
 import { createPost } from "../api/posts.js";
+import { fetchPost } from "../api/posts.js";
+import { commentCard } from "../components/commentCard.js";
 
 
 export async function renderHome() {
@@ -47,52 +49,75 @@ export async function renderHome() {
                 content: document.getElementById("post-content").value
         };
 
+        try {
+            const data = await createPost(postData);
+            console.log(data);
+        } catch (err) {
+            console.error(err);
+        }
+
+    });
+    document.addEventListener("click", async (e) => {
+        const card = e.target.closest(".post-card");
+        if (!card) return;
+        const id = card.dataset.id;
+        const data = await fetchPost(id);
+        document.getElementById("modal-post").innerHTML =
+            postCard(data.post);
+        document.getElementById("comments-container").innerHTML =
+            data.comments
+                .map(comment => commentCard(comment))
+                .join("");
+        document
+            .getElementById("post-modal")
+            .classList.remove("hidden");
+    });
+    document
+        .getElementById("close-post-modal")
+        .addEventListener("click", () => {
+
+            document
+                .getElementById("post-modal")
+                .classList.add("hidden");
+        });
+
+}
+
+async function loadPosts() {
+
+    if (argument.isLoading || !argument.hasMore) return;
+
+    argument.isLoading = true;
+
+    const postsContainer = document.querySelector(".posts-container");
+
     try {
-        const data = await createPost(postData);
-        console.log(data);
+
+        const data = await fetchPosts(argument);
+
+        postsContainer.insertAdjacentHTML(
+            "beforeend",
+            data.posts.map(post => postCard(post)).join("")
+        );
+
+        nextCursor = argument.nextCursor;
+        hasMore = argument.hasMore;
+
     } catch (err) {
         console.error(err);
     }
 
-});
-
+    argument.isLoading = false;
 }
 
-// async function loadPosts() {
+function handleScroll() {
 
-//     if (argument.isLoading || !argument.hasMore) return;
+    const scrollPosition = window.innerHeight + window.scrollY;
 
-//     argument.isLoading = true;
+    const bottom = document.body.offsetHeight - 300;
 
-//     const postsContainer = document.querySelector(".posts-container");
+    if (scrollPosition >= bottom) {
+        loadPosts();
+    }
 
-//     try {
-
-//         const data = await fetchPosts(argument);
-
-//         postsContainer.insertAdjacentHTML(
-//             "beforeend",
-//             data.posts.map(post => postCard(post)).join("")
-//         );
-
-//         nextCursor = argument.nextCursor;
-//         hasMore = argument.hasMore;
-
-//     } catch (err) {
-//         console.error(err);
-//     }
-
-//     argument.isLoading = false;
-// }
-
-// function handleScroll() {
-
-//     const scrollPosition = window.innerHeight + window.scrollY;
-
-//     const bottom = document.body.offsetHeight - 300;
-
-//     if (scrollPosition >= bottom) {
-//         loadPosts();
-//     }
-
-// }
+}

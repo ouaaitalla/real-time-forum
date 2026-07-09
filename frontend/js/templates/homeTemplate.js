@@ -24,6 +24,7 @@ export function homeTemplate() {
     return `
         ${renderNavbar()}
         ${createPostModal()}
+        ${postModal()}
         <main class="home-container">
 
             <section class="posts-container">

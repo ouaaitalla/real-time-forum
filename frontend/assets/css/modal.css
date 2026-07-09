@@ -78,3 +78,13 @@
 }
 
 
+.post-modal-content{
+
+    width:700px;
+    max-width:95%;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+}
+
